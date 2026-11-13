@@ -14,20 +14,39 @@
 void left_auton(){
   chassis.setHeading(0);
   // sequence of actions for left auton
+  //toggle to our color  // sequence of actions for right auton
   //toggle to our color
-  chassis.drive(200, 12);
-  chassis.drive(-200, 12);
-  
-  //score preload in alliance
+  lift_up_to_position(17,true);
   banshee();
-  chassis.drive(500, 12);
-  chassis.turn(90, 12);
-  chassis.drive(500, 12);
-  /*chassis.drive(500);*/
+  lift_down_to_position(17, false);
+  //score preload in alliance
+  chassis.drive(-11);
+  chassis.turn(-90);
+  chassis.drive(-13);
+  chassis.drive(1);
+  outtake();
+  wait(500, msec);
+  stop_intake_outtake();
   //If the alliance takes neutral pins+cups, then one of two cases can happen
     //A. They take one, we take one
       //Assume they take the one near the center, then we need to check to see if we collide:
       //Assume they take the one farther from the center, then we need to check to see if we collide:
+      lift_up_to_position(15, false);
+      chassis.drive(10);
+      chassis.turn(-45);
+      chassis.drive(-17);
+      intake();
+      lift_down_to_position(15, true);
+      banshee45();
+      wait(800, msec);
+      banshee();
+      lift_up_to_position(10, false);
+      chassis.drive(16);
+      chassis.turn(-90);
+      chassis.drive(-8);
+      lift_down_to_position(5, true);
+      outtake();
+      lift_up_to_position(5, false);
     //If we collide, either add waits, tell them to add waits, or eitther of us dont run depending on the case of the consistency of the autons between us and them. The autons to take both is below. Do note auton is already near 15 seconds
 
     //B. They take both If they take both, then just dont run anything else, otherwise (if the alliance doesnt get anything), run the following one of two choices: 

@@ -345,7 +345,7 @@ void buttonYFunction() {
 
 //Kevin's function for grabber motor 10/15/26
 void buttonL1Function() {
-  liftMotor.spin(forward, 12, volt);
+  liftMotor.spin(forward, 100, velocityUnits::pct);
   while(controller1.ButtonL1.pressing()) {
     wait(20, msec);
   }
@@ -379,7 +379,7 @@ void buttonR2Function() {
 }
 //Kevin's function for lift motor 10/19/26
 void buttonL2Function() {
-  liftMotor.spin(reverse, 12, volt);
+  liftMotor.spin(reverse, 100, velocityUnits::pct);
   while(controller1.ButtonL2.pressing()) {
     wait(20, msec);
   }
