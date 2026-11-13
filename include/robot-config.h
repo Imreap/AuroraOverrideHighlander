@@ -56,8 +56,8 @@ const int INERTIAL_SCALE = 360;
 
 const int GRABBER_PORT = -1;  // use unused port for the outtake motor
 
-const int LIFT_PORT1 = 18;
-const int LIFT_PORT2 = -19;  // use unused port for the second lift motor
+const int LIFT_PORT1 = -18;
+const int LIFT_PORT2 = 19;  // use unused port for the second lift motor
 const int LIFT_SENSOR_PORT = UNUSED_PORT;  // use unused port for the lift rotation sensor
 const float LIFT_MAX_HEIGHT = 0;  // the max lift position is not set
 
@@ -79,6 +79,7 @@ float getLiftPosition(bool printPosition = false);
 void lift_up_to_position(int position);
 void lift_down_to_position(int position);
 void banshee();
+void banshee45();
 void intake();
 void outtake();
 void stop_intake_outtake();

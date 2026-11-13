@@ -70,7 +70,11 @@ void usercontrol(void) {
         throttle = threshold(controller1.Axis2.position(), -throttleLimit, throttleLimit);
         turn = threshold(controller1.Axis4.position(), -turnLimit, turnLimit);
       }
-      chassis.controlArcade(throttle, turn);
+      if (liftMotor.position(degrees) >= 1000) {
+              chassis.controlArcade(throttle/1.8, turn/1.2);
+      } else {
+        chassis.controlArcade(throttle, turn);
+      }
       break;
     case 0: // single arcade
       throttle = threshold(controller1.Axis2.position(), -throttleLimit, throttleLimit);
@@ -142,19 +146,13 @@ void setChassisDefaults()
 // Autonomous functions
 // ------------------------------------------------------------------------
 
-void lift_up_to_position(int position){
-  while (liftMotor.position(degrees) < position*100){
-    liftMotor.spin(forward, 12, volt);
-    wait(20, msec);
-  }
-  liftMotor.stop(hold);
+void lift_up_to_position(int position, bool wait){
+  liftMotor.spinFor(forward, position*100, degrees, 100, velocityUnits::pct, wait);
+  
 }
-void lift_down_to_position(int position){
-  while (liftMotor.position(degrees) > position*100){
-    liftMotor.spin(forward, -12, volt);
-    wait(20, msec);
-  }
-  liftMotor.stop(hold);
+void lift_down_to_position(int position, bool wait){
+  liftMotor.spinFor(reverse, position*100, degrees, 100, velocityUnits::pct, wait);
+
 }
 
 void banshee(){
@@ -185,6 +183,15 @@ void outtake(){
 void stop_intake_outtake(){
   grabberMotor.stop(coast);
   rollerMotor.stop(coast);
+}
+void banshee45(){
+  while (bansheeMotor.position(degrees) > 170){
+   bansheeMotor.spin(forward, -12, volt);
+   wait(20, msec);
+  }
+  bansheeMotor.stop(hold);
+  bansheemode=0;
+
 }
 // ------------------------------------------------------------------------
 //        Helper functions definition
@@ -261,18 +268,28 @@ void dropLiftToGround()
 // ------------------------------------------------------------------------
 //              Button controls
 // ------------------------------------------------------------------------
-
+int bansheelastpos=0;
 // todo: lift control
 void buttonUpFunction() {
-  
+  bansheelastpos=bansheeMotor.position(degrees);
+  bansheeMotor.spin(reverse, 12, volt);
+  while (fabs(bansheeMotor.position(degrees)-bansheelastpos) >30 ){
+   wait(100, msec);
+  }  
+  bansheeMotor.stop(hold);
+  bansheeMotor.setPosition(0, degrees);
 }
 
 void buttonDownFunction() {
 
 }
+ /*while (bansheeMotor.position(degrees) > 170){
+   bansheeMotor.spin(forward, -12, volt);
+   wait(20, msec);
+  }*/
 void buttonXFunction() {
   if (bansheemode==0){
-    while (bansheeMotor.position(degrees) < 320){
+    while (bansheeMotor.position(degrees) < 340){
    bansheeMotor.spin(forward, 12, volt);
    wait(20, msec);
  }
@@ -342,7 +359,7 @@ void buttonR1Function() {
  }
   rollerMotor.stop(coast);
  liftMotor.spin(forward, 12, volt);
- while (bansheeMotor.position(degrees) < 320){
+ while (bansheeMotor.position(degrees) < 340){
    bansheeMotor.spin(forward, 12, volt);
    wait(20, msec);
  }
@@ -365,6 +382,8 @@ void buttonL2Function() {
   while(controller1.ButtonL2.pressing()) {
     wait(20, msec);
   }
+    liftMotor.setPosition(0, degrees);
+
   liftMotor.stop(hold);
 }
 
