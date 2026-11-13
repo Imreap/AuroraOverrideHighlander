@@ -2,7 +2,7 @@
 using namespace vex;
 
 // you can define multiple robots with different motor configs
-#define practice_bot 
+#define william_test_bot 
 
 #define UNUSED_PORT -21
 
@@ -37,12 +37,12 @@ const int NUMBER_OF_MOTORS = 7;
 
 #endif
 
-#ifdef one_motor_test
-const int LEFT_PORT1 = UNUSED_PORT;
-const int LEFT_PORT2 = UNUSED_PORT;
+#ifdef william_test_bot
+const int LEFT_PORT1 = -6;
+const int LEFT_PORT2 = -7;
 const int LEFT_PORT3 = UNUSED_PORT;  // use unused port for the third left motor
-const int RIGHT_PORT1 = UNUSED_PORT;
-const int RIGHT_PORT2 = UNUSED_PORT;
+const int RIGHT_PORT1 = 4;
+const int RIGHT_PORT2 = 5;
 const int RIGHT_PORT3 = UNUSED_PORT; // use unused port for the third right motor
 const float WHEEL_DIAMETER = 4.0;
 const float GEAR_RATIO = 1/3.0;  // default cartiridge is 600rpm
@@ -51,17 +51,18 @@ const int DRIVE_MODE = 1;  //1 = double arcade, 2 = tank
 const bool LEFT_RIGHT_STICK_SWAP = false;
 const int SPEED_LIMIT = 100; // drive speed limit when lift is at max height, set to 100 if no speed reduction is needed
 
-const int INERTIAL_PORT = UNUSED_PORT;  //use unused negative port number to skip inertial sensor setup
+const int INERTIAL_PORT = 2;  //use unused negative port number to skip inertial sensor setup
 const int INERTIAL_SCALE = 360;
 
-const int GRABBER_PORT = UNUSED_PORT;  // use unused port for the grabber motor
+const int GRABBER_PORT = -1;  // use unused port for the outtake motor
 
-const int LIFT_PORT1 = 1;
-const int LIFT_PORT2 = -2;  // use unused port for the second lift motor
+const int LIFT_PORT1 = 18;
+const int LIFT_PORT2 = -19;  // use unused port for the second lift motor
 const int LIFT_SENSOR_PORT = UNUSED_PORT;  // use unused port for the lift rotation sensor
 const float LIFT_MAX_HEIGHT = 0;  // the max lift position is not set
 
-const int ROLLER_PORT = UNUSED_PORT;  
+const int ROLLER_PORT = -11;  //intake port
+const int BANSHEE_PORT = -9;  //banshee port
 const int OPTICAL_PORT = UNUSED_PORT;  // use unused port for the optical sensor
 
 const int NUMBER_OF_MOTORS = 2;
@@ -75,6 +76,12 @@ extern motor rollerMotor;
 
 float speedLimitWithHeight();
 float getLiftPosition(bool printPosition = false);
+void lift_up_to_position(int position);
+void lift_down_to_position(int position);
+void banshee();
+void intake();
+void outtake();
+void stop_intake_outtake();
 
 // ------------------------------------------------------------------------
 //              System setup

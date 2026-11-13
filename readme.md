@@ -215,7 +215,6 @@ chassis.drive(30, 10, 45, 6, 1);
 
     // Stops the drivetrain.
   void stop(vex::brakeType mode);
-
   // Gets the current heading of the robot.
   float getHeading();
 

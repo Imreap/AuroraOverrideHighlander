@@ -14,11 +14,48 @@
 void left_auton(){
   chassis.setHeading(0);
   // sequence of actions for left auton
+  //toggle to our color
+  chassis.drive(200, 12);
+  chassis.drive(-200, 12);
+  
+  //score preload in alliance
+  banshee();
+  chassis.drive(500, 12);
+  chassis.turn(90, 12);
+  chassis.drive(500, 12);
+
+  /*chassis.drive(500);*/
+  //If the alliance takes neutral pins+cups, then one of two cases can happen
+    //A. They take one, we take one
+      //Assume they take the one near the center, then we need to check to see if we collide:
+      //Assume they take the one farther from the center, then we need to check to see if we collide:
+    //If we collide, either add waits, tell them to add waits, or eitther of us dont run depending on the case of the consistency of the autons between us and them. The autons to take both is below
+
+    //B. They take both If they take both, then just dont run anything else, otherwise (if the alliance doesnt get anything), run the following one of two choices: 
+      //I. Take only one and score it on the neutral goal
+      //II. Take both and score them on the alliance goal
 }
 
 void right_auton(){ 
-  chassis.setHeading(-90);
+  chassis.setHeading(90);
   // sequence of actions for right auton
+  //toggle to our color
+  lift_up_to_position(5);
+  banshee();
+  lift_down_to_position(0);
+  chassis.drive(-5);
+  chassis.drive(5);
+  //score preload in alliance
+  chassis.drive(-10);
+  chassis.turn(0);
+  chassis.drive(-10);
+  //All thought matrixes are above
+  //A. They take one, we take one
+      //Assume they take the one near the center, then we need to check to see if we collide:
+      //Assume they take the one farther from the center, then we need to check to see if we collide:
+  //B. They take both If they take both, then just dont run anything else,  otherwise (if the alliance doesnt get anything), run the following one of two choices: 
+      //I. Take only one and score it on the neutral goal
+      //II. Take both and score them on the alliance goal
 }
 
 // The names of the autonomous routines to be displayed in the menu.
