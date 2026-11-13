@@ -76,8 +76,8 @@ extern motor rollerMotor;
 
 float speedLimitWithHeight();
 float getLiftPosition(bool printPosition = false);
-void lift_up_to_position(int position);
-void lift_down_to_position(int position);
+void lift_up_to_position(int position, bool wait);
+void lift_down_to_position(int position, bool wait);
 void banshee();
 void banshee45();
 void intake();

@@ -273,8 +273,9 @@ int bansheelastpos=0;
 void buttonUpFunction() {
   bansheelastpos=bansheeMotor.position(degrees);
   bansheeMotor.spin(reverse, 12, volt);
-  while (fabs(bansheeMotor.position(degrees)-bansheelastpos) >30 ){
-   wait(100, msec);
+
+  while (controller1.ButtonUp.pressing()) {
+    wait(20, msec);
   }  
   bansheeMotor.stop(hold);
   bansheeMotor.setPosition(0, degrees);
@@ -378,7 +379,7 @@ void buttonR2Function() {
 }
 //Kevin's function for lift motor 10/19/26
 void buttonL2Function() {
-  liftMotor.spin(reverse, 8, volt);
+  liftMotor.spin(reverse, 12, volt);
   while(controller1.ButtonL2.pressing()) {
     wait(20, msec);
   }
@@ -442,6 +443,10 @@ void quickTestCode()
   // Write test code here:
 
   chassis.setHeading(0);
+
+  lift_up_to_position(10, true);
+  wait(500, msec);
+  lift_down_to_position(10, true);
 
 
 
