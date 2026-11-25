@@ -24,13 +24,13 @@ private:
   float turnKp = 0.2, turnKi = 0.015, turnKd = 1.5, turnStarti = 7.5;
 
   // turn exit conditions.
-  float turnSettleError = 1.5, turnSettleTime = 300, turnTimeout = 2000;
+  float turnSettleError = 1.5, turnSettleTime = 300, turnTimeout = 1500;
 
   // PID constants for driving.
   float driveKp = 1.5, driveKi = 0, driveKd = 10, driveStarti = 0;
 
   // drive exit conditions.
-  float driveSettleError = 1, driveSettleTime = 300, driveTimeout = 2500;
+  float driveSettleError = 1, driveSettleTime = 300, driveTimeout = 1500;
 
   // PID constants for maintaining heading while driving.
   float headingKp = 0.4, headingKd = 1;

@@ -270,19 +270,26 @@ void dropLiftToGround()
 // ------------------------------------------------------------------------
 int bansheelastpos=0;
 // todo: lift control
-void buttonUpFunction() {
+void buttonDownFunction() {
   bansheelastpos=bansheeMotor.position(degrees);
   bansheeMotor.spin(reverse, 12, volt);
 
-  while (controller1.ButtonUp.pressing()) {
+  while (controller1.ButtonDown.pressing()) {
     wait(20, msec);
   }  
   bansheeMotor.stop(hold);
   bansheeMotor.setPosition(0, degrees);
 }
 
-void buttonDownFunction() {
+void buttonUpFunction() {
+  bansheelastpos=bansheeMotor.position(degrees);
+  bansheeMotor.spin(forward, 12, volt);
 
+  while (controller1.ButtonUp.pressing()) {
+    wait(20, msec);
+  }  
+  bansheeMotor.stop(hold);
+  bansheeMotor.setPosition(0, degrees);
 }
  /*while (bansheeMotor.position(degrees) > 170){
    bansheeMotor.spin(forward, -12, volt);
@@ -359,11 +366,13 @@ void buttonR1Function() {
    grabberMotor.spin(forward, 12, volt);
  }
   rollerMotor.stop(coast);
- liftMotor.spin(forward, 12, volt);
+   liftMotor.spin(forward, 12, volt);
+  wait(300,msec);
  while (bansheeMotor.position(degrees) < 340){
-   bansheeMotor.spin(forward, 12, volt);
+   bansheeMotor.spin(forward, 4, volt);
    wait(20, msec);
  }
+
  grabberMotor.spin(forward,2,volt);
  bansheeMotor.stop(hold);
  liftMotor.stop(hold);
